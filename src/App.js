@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
 function App() {
+  const [name, setName] = useState("Mösyö");
+  const [flag, setFlag] = useState(false);
+  const [steps, setSteps] = useState(0);
+  const [names, setNames] = useState([]);
+
+  function changeName() {
+    return setFlag(!flag);
+  }
+  function increment() {
+    return setSteps(steps + 1);
+    //setSteps((prevState) => prevState + 1);
+  }
+  function decrement() {
+    return setSteps(steps - 1);
+  }
+  function addNames(e) {
+    e.preventDefault();
+    setNames([...names, { id: names.length, name }]);
+  }
+  console.log("file: App.js - line 24 - names", names);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>Hello, {flag ? name : ""}</div>
+      <button onClick={changeName}>Click Me</button>
+      <hr />
+      <div>{steps}</div>
+      <button onClick={increment}>+</button>
+      <button onClick={decrement}>-</button>
+      <hr />
+      <form onSubmit={addNames}>
+        <input type="text" value={name} placeholder="add names" onChange={(e) => setName(e.target.value)} />
+      </form>
     </div>
   );
 }
