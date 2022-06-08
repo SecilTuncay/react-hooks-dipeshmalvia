@@ -4,7 +4,9 @@ import "./App.css";
 function App() {
   const [name, setName] = useState("Mösyö");
   const [flag, setFlag] = useState(false);
-  const [steps, setSteps] = useState(0);
+  const [steps, setSteps] = useState(() => {
+    return 0;
+  });
   const [names, setNames] = useState([]);
 
   function changeName() {
